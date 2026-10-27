@@ -35,7 +35,7 @@ body{background:#f0f4f1}.shell{margin:24px auto 50px;min-height:calc(100vh - 75p
 .expense-row .curr{font-variant-numeric:tabular-nums}
 @media(max-width:700px){.timeline-entry{grid-template-columns:88px 1fr;gap:11px;padding:15px}.timeline-date{font-size:12px}.menu{gap:0;justify-content:space-between}.menu button{font-size:13px;padding:12px 7px}.summary-card strong{overflow-wrap:anywhere}}
 @media(max-width:370px){.menu button{font-size:12px;padding:10px 5px}.summary-cards{grid-template-columns:1fr}}
-</style></head><body><div class="shell"><header class="nav"><div class="logo">✳ IVF Journey</div><small>我們的療程紀錄</small></header><main id="preview" class="main"></main><footer class="foot" style="padding-bottom:24px">僅供查看療程進度 · 檢查項目以醫療院所為準</footer></div><script>
+</style></head><body><div class="shell"><header class="nav"><div class="logo">✳ IVF Journey</div><small>偉大的航道療程紀錄</small></header><main id="preview" class="main"></main><footer class="foot" style="padding-bottom:24px">僅供查看療程進度 · 檢查項目以醫療院所為準</footer></div><script>
 // IVF Journey － 純展示網站，觀看者無法在網頁直接修改內容。
 // 所有資料只需在此 HTML 檔案中修改，再提交至 GitHub。
 // TESTS：done=true 表示檢查已完成；date 是實際完成日期；plannedDate 是右側時間欄位顯示文字。
@@ -311,13 +311,13 @@ const TIMELINES={
     {
       "date": "2026/10/30",
       "title": "血液檢測報告",
-      "detail": "預計提供報告",
+      "detail": "10/27檢驗，預計10/30取得報告",
       "status": "預計"
     },
     {
       "date": "2026/11月底",
       "title": "基因檢測報告",
-      "detail": "預計取得報告",
+      "detail": "10/27檢驗，預計11月底取得報告",
       "status": "預計"
     },
     {
@@ -396,7 +396,7 @@ function expenseTotal(currency,who){return EXPENSES.filter(x=>x.currency===curre
 function expenseMoney(n,currency){return (currency==='TWD'?'NT$':'US$')+Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});}
 function expensesPage(){return `
  <div class="eyebrow">OUR JOURNEY / EXPENSES</div>
- <div class="expense-intro"><div><h1 class="title">費用紀錄</h1><p class="sub">植皙與植惇的療程費用統一記錄，保留原始幣別與費用歸屬。</p></div></div>
+ <div class="expense-intro"><div><h1 class="title">費用紀錄</h1><p class="sub">療程費用記錄，保留原始幣別與費用歸屬。</p></div></div>
  ${topMenu()}
  <div class="expense-meta"><h2>費用明細</h2><span class="muted">共 ${EXPENSES.length} 筆・依日期排列</span></div>
  <div class="expense-list">
@@ -419,8 +419,8 @@ function expensesPage(){return `
 function render(){const root=document.getElementById('preview');
  if(page==='expenses'){root.innerHTML=expensesPage();return;}
  root.innerHTML=`
- <div class="eyebrow">OUR JOURNEY / OVERVIEW</div><h1 class="title">我們的療程總覽</h1>
- <p class="sub">一眼掌握植皙與植惇的檢查準備進度</p>
+ <div class="eyebrow">OUR JOURNEY / OVERVIEW</div><h1 class="title">偉大的航道—療程總覽</h1>
+ <p class="sub">一眼掌握植皙與植惇的進度</p>
  <div class="grid2" style="margin-top:25px">${['植皙','植惇'].map(n=>`<div class="card"><div class="eyebrow">${n} / CHECKLIST</div><div class="stat">${done(n)} <small style="font-size:14px">/ ${total(n)}</small></div><div class="muted" style="font-size:13px">已完成檢查・${Math.round(100*done(n)/total(n))}%</div>${progress(n)}<button type="button" class="back" style="margin-top:18px" onclick="setPerson('${n}')">查看${n}的項目 →</button></div>`).join('')}</div>
  ${topMenu()}${personButtons()}
  ${page==='timeline'?timelinePage(person):sections(person)}`;
